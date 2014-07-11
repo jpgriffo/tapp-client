@@ -1,0 +1,3 @@
+<tapp version="1.0" server="https://clients.tapp.in:886/" log_file="./log/tapp-client.log" log_level="debug">
+	<ssl cert="./tapp/client_ssl/cert.pem" key="./tapp/client_ssl/private/key.pem" server_ca="./tapp/client_ssl/ca_cert.pem" />
+</tapp>
