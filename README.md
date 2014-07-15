@@ -19,7 +19,7 @@ Clonar este repositorio en vuestro equipo y trabajad sobre el para resolver la p
 Criterios de valoración
 =======================
 * Valoraremos los apartados independientemente, si os 'atrancáis' con un apartado no pasa nada, pasad al siguiente y mandadnos lo que tengais
-	* Como bonus valoraríamos tests del código desarrollado, o incluso mejor, la aplicación de TDD/BDD
-	* No solo valoramos el resultado final si no también el proceso de desarrollo: examinaremos el historial de git
+* Como bonus valoraríamos tests del código desarrollado, o incluso mejor, la aplicación de TDD/BDD
+* No solo valoramos el resultado final si no también el proceso de desarrollo: examinaremos el historial de git
 
 La realización de la prueba no es obligatoria para permanecer en el proceso de selección, pero si que ayuda bastante puesto que nos permite evaluaros en base a algo más que el CV. 
