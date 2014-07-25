@@ -9,10 +9,12 @@ import "os"
 import "log"
 import "crypto/tls"
 import "runtime"
+import "bytes"
 
 
 import "github.com/jpgriffo/tapp-client/firewall"
 import "github.com/jpgriffo/tapp-client/firewall/data"
+import "./script"
 
 
 type TappConfig struct {
@@ -103,5 +105,45 @@ func main() {
 		firewall.Drop()
 		firewall.Apply(policy)
 	}
+
+	response, err = client.Get(config.ApiEndpoint + "blueprint/script_characterizations?type=boot")
+    if err != nil {
+        log.Fatalln(err)
+    }
+    defer response.Body.Close()
+
+	body, err = ioutil.ReadAll(response.Body)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+
+	fmt.Printf("%s\n\n",body)
+
+	var script_characterizations []script.ScriptCharacterization
+
+	json.Unmarshal(body, &script_characterizations)
+	fmt.Printf("%v\n", script_characterizations)
+
+	for _, script_characterization := range script_characterizations {
+		var b []byte
+		script_conclusion, err := script_characterization.Execute()
+		if err != nil {
+			fmt.Println("error:", err)
+		}
+		b, err = script_conclusion.ToJson()
+		if err != nil {
+			fmt.Println("error:", err)
+		}
+		fmt.Printf("%s\n", b)
+
+		post_body := "{\"script_conclusion\":" + string(b[:]) + "}"
+		response, err = client.Post(config.ApiEndpoint + "blueprint/script_conclusions", "application/json", bytes.NewBufferString(post_body))
+	    if err != nil {
+	        log.Fatalln(err)
+	    }
+	    defer response.Body.Close()
+	}
+
 
 }
